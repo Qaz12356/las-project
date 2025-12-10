@@ -2,46 +2,58 @@ stages:
   - build
   - deploy
 
-variables:
-  PUBLIC_DIR: public
+# 使用缓存加速构建
+cache:
+  paths:
+    - frontend/node_modules/
+  key: "${CI_COMMIT_REF_SLUG}"
 
 # 构建前端
 build_frontend:
   stage: build
-  image: node:16
+  image: node:16.20.2  # 指定 Node 版本（兼容你的依赖）
+  before_script:
+    - echo "Node版本: $(node -v)"
+    - echo "NPM版本: $(npm -v)"
+    - echo "工作目录: $(pwd)"
   script:
-    - echo "开始构建前端..."
     - cd frontend
-    - npm ci  # 使用 ci 代替 install，更稳定
+    # 清理可能的缓存
+    - rm -rf node_modules package-lock.json
+    # 安装依赖（使用ci命令更可靠）
+    - npm ci --legacy-peer-deps --no-audit
+    # 构建项目
     - npm run build
-    - echo "前端构建完成"
+    # 检查构建输出
+    - echo "构建完成，dist目录内容:"
+    - ls -la dist/
   artifacts:
     paths:
-      - frontend/dist
+      - frontend/dist/
     expire_in: 1 hour
   only:
     - main
-  cache:
-    paths:
-      - frontend/node_modules/
+  # 如果构建失败，重试一次
+  retry: 1
 
 # 部署到 GitLab Pages
 pages:
   stage: deploy
-  image: alpine:latest  # 轻量级镜像用于复制文件
+  image: alpine:latest
   dependencies:
-    - build_frontend  # 依赖构建阶段
+    - build_frontend
   script:
-    - echo "开始部署到 Pages..."
+    - echo "开始部署到 GitLab Pages..."
     - mkdir -p public
-    - if [ -d "frontend/dist" ]; then
-        cp -r frontend/dist/* public/;
-        echo "文件复制完成";
-      else
-        echo "错误：frontend/dist 目录不存在";
+    # 检查是否有构建产物
+    - if [ ! -d "frontend/dist" ]; then
+        echo "错误: frontend/dist 目录不存在！";
         exit 1;
       fi
-    - echo "Pages 部署完成"
+    # 复制文件
+    - cp -r frontend/dist/* public/
+    - echo "部署完成！"
+    - echo "可以访问: https://$CI_PROJECT_NAMESPACE.gitlab.io/$CI_PROJECT_NAME"
   artifacts:
     paths:
       - public
