@@ -1,101 +1,79 @@
-import {
-	defineConfig
-} from 'vite'
+import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import AutoImport from 'unplugin-auto-import/vite'
 import Components from "unplugin-vue-components/vite"
-import {
-	resolve
-} from 'path'
-import {
-	ElementPlusResolver
-} from "unplugin-vue-components/resolvers"
+import { resolve } from 'path'
+import { ElementPlusResolver } from "unplugin-vue-components/resolvers"
 
-// 仔细研究下他的配置
-//https://blog.csdn.net/qq_43231248/article/details/128134508 
-// https://vitejs.dev/config/
 export default defineConfig({
-	// 新增以下定义
-	  define: {
-	    '__VUE_PROD_HYDRATION_MISMATCH_DETAILS__': false,
-	    '__VUE_OPTIONS_API__': true,      // 如果使用 Options API
-	    '__VUE_PROD_DEVTOOLS__': false    // 禁用生产环境 DevTools
-	  },
-	
-	plugins: [vue(),
-		AutoImport({
-			imports: ['vue', 'vue-router', 'vuex'],
-			// 自动导入 Element Plus 相关函数，如：ElMessage, ElMessageBox... (带样式)
-			resolvers: [
-				ElementPlusResolver(),
-			],
-		}), Components({
-			resolvers: [
-				// 自动导入 Element Plus 组件
-				ElementPlusResolver(),
-			],
-		}),
-	],
-	resolve: {
-		alias: {
-			'@': resolve(__dirname, 'src'),
-		}
-	},
-	// const path = require('path');
-	
-	// module.exports = {
-	//   configureWebpack: {
-	//     resolve: {
-	//       alias: {
-	//         '@': path.resolve(__dirname, 'src')
-	//       }
-	//     }
-	//   }
-	// };
-	
-	
-	server: {
-		host: true,
-		port: 9090,
-		open: true,
-		proxy: {
-			'/las/api': {
-				target: 'http://127.0.0.1:8080/', //实际请求地址
-				changeOrigin: true,
-			},
-		}
-	},
-	build: {
-		outDir:'../static/',
-		sourcemap: false,
-		minify: 'terser',
-		chunkSizeWarningLimit: 1500,
-		emptyOutDir: true,
-		terserOptions: {
-			compress: {
-				drop_console: true,
-				drop_debugger: true
-			}
-		},
-		rollupOptions: {
-			output: {
-				manualChunks(id) {
-					if (id.includes('node_modules')) {
-						return id.toString().split('node_modules/')[1].split('/')[0].toString();
-					}
-				},
-				chunkFileNames: (chunkInfo) => {
-					const facadeModuleId = chunkInfo.facadeModuleId ? chunkInfo.facadeModuleId.split('/') :
-						[];
-					const fileName = facadeModuleId[facadeModuleId.length - 2] || '[name]';
-					return `js/${fileName}/[name].[hash].js`;
-				}
-			}
-		}
-	}, //打包时删除console debugger输出语句
-	esbuild: {
-		drop: ["console", "debugger"]
-	},
-
-	// base: '/las', //定义上下文
+  define: {
+    '__VUE_PROD_HYDRATION_MISMATCH_DETAILS__': false,
+    '__VUE_OPTIONS_API__': true,
+    '__VUE_PROD_DEVTOOLS__': false
+  },
+  
+  // 重要：GitLab Pages 部署必须设置这个
+  base: '/las-project/',
+  
+  plugins: [
+    vue(),
+    AutoImport({
+      imports: ['vue', 'vue-router', 'vuex'],
+      resolvers: [ElementPlusResolver()],
+    }), 
+    Components({
+      resolvers: [ElementPlusResolver()],
+    }),
+  ],
+  
+  resolve: {
+    alias: {
+      '@': resolve(__dirname, 'src'),
+    }
+  },
+  
+  server: {
+    host: true,
+    port: 9090,
+    open: true,
+    proxy: {
+      '/api': {
+        target: 'http://127.0.0.1:8080/',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api/, '')
+      },
+    }
+  },
+  
+  build: {
+    outDir: 'dist',  // 改为 dist，这是标准输出目录
+    sourcemap: false,
+    minify: 'terser',
+    chunkSizeWarningLimit: 1500,
+    emptyOutDir: true,
+    terserOptions: {
+      compress: {
+        drop_console: true,
+        drop_debugger: true
+      }
+    },
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          if (id.includes('node_modules')) {
+            return id.toString().split('node_modules/')[1].split('/')[0].toString();
+          }
+        },
+        chunkFileNames: (chunkInfo) => {
+          const facadeModuleId = chunkInfo.facadeModuleId ? chunkInfo.facadeModuleId.split('/') : [];
+          const fileName = facadeModuleId[facadeModuleId.length - 2] || '[name]';
+          return `js/${fileName}/[name].[hash].js`;
+        }
+      }
+    }
+  },
+  
+  esbuild: {
+    drop: ["console", "debugger"]
+  },
 })

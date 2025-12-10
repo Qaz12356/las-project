@@ -1,0 +1,28 @@
+# GitLab CI/CD 配置
+stages:
+  - build
+  - deploy
+
+build_frontend:
+  stage: build
+  image: node:16
+  script:
+    - cd frontend
+    - npm install
+    - npm run build
+  artifacts:
+    paths:
+      - frontend/dist
+  only:
+    - main
+
+pages:
+  stage: deploy
+  script:
+    - mkdir -p public
+    - cp -r frontend/dist/* public/
+  artifacts:
+    paths:
+      - public
+  only:
+    - main
