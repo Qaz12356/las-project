@@ -1,26 +1,47 @@
-# GitLab CI/CD 配置
 stages:
   - build
   - deploy
 
+variables:
+  PUBLIC_DIR: public
+
+# 构建前端
 build_frontend:
   stage: build
   image: node:16
   script:
+    - echo "开始构建前端..."
     - cd frontend
-    - npm install
+    - npm ci  # 使用 ci 代替 install，更稳定
     - npm run build
+    - echo "前端构建完成"
   artifacts:
     paths:
       - frontend/dist
+    expire_in: 1 hour
   only:
     - main
+  cache:
+    paths:
+      - frontend/node_modules/
 
+# 部署到 GitLab Pages
 pages:
   stage: deploy
+  image: alpine:latest  # 轻量级镜像用于复制文件
+  dependencies:
+    - build_frontend  # 依赖构建阶段
   script:
+    - echo "开始部署到 Pages..."
     - mkdir -p public
-    - cp -r frontend/dist/* public/
+    - if [ -d "frontend/dist" ]; then
+        cp -r frontend/dist/* public/;
+        echo "文件复制完成";
+      else
+        echo "错误：frontend/dist 目录不存在";
+        exit 1;
+      fi
+    - echo "Pages 部署完成"
   artifacts:
     paths:
       - public
