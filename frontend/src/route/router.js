@@ -1,0 +1,60 @@
+import {
+	createRouter,
+	createWebHashHistory
+} from 'vue-router'
+const router = createRouter({
+	history: createWebHashHistory(),
+	//路由列表，由对象数组组成，每个对象由若干选项组成
+	routes: [{
+			path: "/",
+			component: () => import("@/views/login.vue")
+		}, {
+			path: "/index",
+			name: "index",
+			component: () => import("@/views/index.vue"),
+			children: [{
+					path: "/lfRegistration",
+					component: () => import("@/views/lfManagement/lfRegistration.vue")
+				},
+				{
+					path: "/myPosting",
+					component: () => import("@/views/lfManagement/myPosting.vue")
+				},
+				{
+					path: "/findLost",
+					component: () => import("@/views/lfManagement/findLost.vue")
+				},
+				{
+					path: "/pie",
+					component: () => import("@/views/anasyle/pie.vue")
+				},
+				{
+					path: "/Bulletin",
+					component: () => import("@/views/Bulletin.vue")
+				},
+				{
+					path: "/userManagemente",
+					component: () => import("@/views/sysSettings/userManagemente.vue")
+				},
+				{
+					path: "/lostManagement",
+					component: () => import("@/views/sysSettings/lostManagement.vue")
+				},
+				{
+					path: "/lostTypeMg",
+					component: () => import("@/views/sysSettings/lostTypeMg.vue")
+				},
+				{
+					path: "/Claiminfo",
+					component: () => import("@/views/sysSettings/Claiminfo.vue")
+				},
+				{
+					path: "/perCenter",
+					component: () => import("@/views/perCenter.vue")
+				},
+			]
+		}
+
+	]
+})
+export default router

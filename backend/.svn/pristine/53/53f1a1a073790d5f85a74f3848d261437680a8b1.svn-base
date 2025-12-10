@@ -1,0 +1,139 @@
+<template>
+ 	<div class="bgbody">
+ 		<div id="login_box">
+			<h1>校园失物招领管理系统</h1>
+ 			<h2>欢迎回来</h2>
+			<p>请登录您的账户</p>
+
+ 			<div class="input_box">
+ 				<input type="text" placeholder="请输入用户账号" v-model="userCode">
+ 			</div>
+ 			<div class="input_box">
+ 				<input type="password" placeholder="请输入密码" v-model="userPass">
+ 			</div>
+ 			<label for="role">角色:</label>
+ 			<select id="role" v-model="role">
+ 				<option value="user">用户</option>
+ 				<option value="admin">管理员</option>
+ 			</select>
+
+ 			<button @click="doLogin()">登录</button><br>
+ 		</div>
+ 	</div>
+ </template>
+ 
+ <script setup>
+ 	import {
+ 		useRouter
+ 	} from "vue-router";
+ 	import {
+ 		useStore
+ 	} from 'vuex'
+import {
+	authenticate }
+	 from "../apis/user";
+ 	//定义变量，用于表单绑定
+ 	let userCode = ref("");
+ 	let userPass = ref("");
+let role = ref("");
+ 	const store = useStore();
+ 	const router = useRouter();
+
+ 	//将action内容统一映射到一个对象中，如果引用次数多可以用该方法
+ 	// const actions = {
+ 	// 	loginLas: (param) => store.dispatch('user/loginLas', param)
+ 	// }
+
+ 	function doLogin() {
+ 			if (userCode.value == "" || userPass.value == "" | role.value == "") {
+ 				ElMessageBox.alert('请输入用户名和密码', {
+ 					type: 'warning',
+ 				})
+ 			} else {
+ 				store.dispatch('user/loginLas', {
+ 					userCode: userCode.value,
+ 					userPass: userPass.value,
+					role: role.value,
+ 					success: function(data) {
+ 						router.push("/index")
+						localStorage.setItem('userRole',role.value)
+ 					}
+ 				})
+				// authenticate(userCode.value,userPass.value,role.value).then(ren=>{
+				// 	//console.log(res)
+				// 	router.push("/index")
+				// 	localStorage.setItem('userRole',role.value)
+				// })
+ 			}
+			//router.push("/index")
+ 		}
+ </script>
+ <style scoped>
+ 	.bgbody {
+ 		background: url('@/assets/cjxy.jpg') no-repeat;
+ 		background-size: 100% 130%;
+ 		height: 100%;
+ 		width: 100%;
+ 		position: fixed;
+ 	}
+
+ 	#login_box {
+ 		width: 20%;
+ 		height: 300px;
+ 		background-color: #ffffff96;
+ 		margin: auto;
+ 		margin-top: 10%;
+ 		text-align: center;
+ 		border-radius: 10px;
+ 		padding: 50px 50px;
+		
+ 	}
+
+ 	#login_box h2 {
+ 		color: #00000090;
+ 		margin-top: 5%;
+ 	}
+
+ 	.input_box {
+ 		margin-top: 5%;
+ 	}
+
+ 	#login_box span {
+ 		color: #000000;
+ 	}
+
+ 	#login_box input {
+ 		border: 0;
+ 		width: 60%;
+ 		font-size: 15px;
+ 		color: #000000;
+ 		background: transparent;
+ 		border-bottom: 2px solid #000000;
+ 		padding: 5px 10px;
+ 		outline: none;
+ 		margin-top: 10px;
+ 	}
+
+ 	#login_box button {
+ 		margin-top: 50px;
+ 		width: 60%;
+ 		height: 30px;
+ 		border-radius: 10px;
+ 		border: 0;
+ 		color: #fff;
+ 		text-align: center;
+ 		line-height: 30px;
+ 		font-size: 15px;
+ 		background-image: linear-gradient(to right, #30cfd0, #330867);
+ 	}
+
+ 	#sign_up {
+ 		margin-top: 45%;
+ 		margin-left: 60%;
+ 	}
+
+ 	#login_box a {
+ 		color: #b94648;
+ 	}
+ </style>
+ 

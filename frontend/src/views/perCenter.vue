@@ -1,0 +1,254 @@
+<template>
+	<div class="per-center">
+		<el-card class="profile-card" v-loading="loading">
+			<div class="profile-header">
+				<el-avatar :size="120">
+					{{ userInfo.userName ? userInfo.userName.charAt(0).toUpperCase() : 'U' }}
+				</el-avatar>
+				<h2 class="username">{{ userInfo.userName }}</h2>
+				<el-tag :type="getRoleType">{{ getRoleLabel }}</el-tag>
+			</div>
+
+			<el-divider />
+
+			<el-form ref="formRef" :model="userInfo" :rules="rules" label-width="100px" class="profile-form">
+				<el-row :gutter="20">
+					<el-col :span="12">
+						<el-form-item label="用户账号">
+							<el-input v-model="userInfo.userCode" disabled />
+						</el-form-item>
+					</el-col>
+					<el-col :span="12">
+						<el-form-item label="用户名称" prop="userName">
+							<el-input v-model="userInfo.userName" :disabled="!isEditing" />
+						</el-form-item>
+					</el-col>
+				</el-row>
+
+				<el-row :gutter="20">
+					<el-col :span="12">
+						<el-form-item label="联系电话" prop="userPhone">
+							<el-input v-model="userInfo.userPhone" :disabled="!isEditing" />
+						</el-form-item>
+					</el-col>
+					<el-col :span="12">
+						<el-form-item label="地址">
+							<el-input v-model="userInfo.userAddr" :disabled="!isEditing" />
+						</el-form-item>
+					</el-col>
+				</el-row>
+
+				<el-row :gutter="20">
+					<el-col :span="12">
+						<el-form-item label="密码" prop="userPass">
+							<el-input v-model="userInfo.userPass" :disabled="!isEditing" type="password"
+								show-password />
+						</el-form-item>
+					</el-col>
+				</el-row>
+
+				<el-form-item>
+					<template v-if="!isEditing">
+						<el-button type="primary" @click="startEdit">编辑信息</el-button>
+					</template>
+					<template v-else>
+						<el-button type="primary" @click="saveChanges">保存</el-button>
+						<el-button @click="cancelEdit">取消</el-button>
+					</template>
+				</el-form-item>
+			</el-form>
+		</el-card>
+	</div>
+</template>
+
+<script setup>
+	import {
+		ref,
+		computed,
+		onMounted
+	} from 'vue';
+	import {
+		ElMessage
+	} from 'element-plus';
+	import {
+		useStore
+	} from 'vuex';
+	import {
+		useRouter
+	} from 'vue-router'; // 导入路由（退出跳转用）
+	import {
+		refreshUser,
+		updUser,
+		findUser,
+		findPer
+	} from "@/apis/user.js"
+
+	const store = useStore()
+	const loading = ref(false)
+	const formRef = ref(null)
+
+	// 初始化时包含 userId 和 userPass
+	const userInfo = computed({
+	  get() {
+	    return store.getters["user/getUserInfo"];
+	  },
+	  set(val) {
+	    // 编辑模式时需要修改，所以添加 setter
+	    store.commit("user/setUserInfo", val);
+	  }
+	});
+
+	const isEditing = ref(false)
+	const originalUserInfo = ref(null)
+
+	// 角色标签计算属性
+	const getRoleLabel = computed(() => {
+		return userInfo.value.role === 'admin' ? '管理员' : '用户'
+	})
+
+	const getRoleType = computed(() => {
+		return userInfo.value.role === 'admin' ? 'danger' : 'info'
+	})
+
+	// 表单验证规则（保留密码字段验证）
+	const rules = {
+		userName: [{
+			required: true,
+			message: '请输入用户名称',
+			trigger: 'blur'
+		}],
+		userPhone: [{
+			pattern: /^1[3-9]\d{9}$/,
+			message: '请输入正确的手机号码',
+			trigger: 'blur'
+		}],
+		userPass: [{
+			min: 6,
+			message: '密码长度不能小于6位',
+			trigger: 'blur',
+			required: false
+		}]
+	}
+
+	// 获取用户信息
+	const fetchUserInfo = async () => {
+		loading.value = true
+		try {
+			let storeUserInfo = store.getters["user/getUserInfo"]
+			if (!storeUserInfo || !storeUserInfo.userName || !storeUserInfo.userCode) {
+				const result = await refreshUser()
+				if (result.code === 200 && result.data) {
+					storeUserInfo = result.data
+				} else if (result.userName && result.userCode) {
+					storeUserInfo = result
+				} else {
+					console.warn('基础用户信息获取失败:', result)
+					return
+				}
+			}
+
+			try {
+				const userData = await findPer(storeUserInfo.userCode)
+				if (userData) {
+					const cleanUserInfo = {
+						userId: userData.userId,
+						userCode: userData.userCode || '',
+						userName: userData.userName || '',
+						userPhone: userData.userPhone || '',
+						userAddr: userData.userAddr || '',
+						userPass: userData.userPass || '',
+						role: userData.role || 'user'
+					}
+					store.commit("user/setUserInfo", cleanUserInfo)
+					userInfo.value = cleanUserInfo
+				} else {
+					ElMessage.warning('获取用户信息失败')
+				}
+			} catch (error) {
+				console.warn('获取详细信息失败:', error)
+				ElMessage.warning('获取用户详细信息失败')
+			}
+		} catch (error) {
+			console.error('获取用户信息错误:', error)
+			ElMessage.warning('部分用户信息可能不完整')
+		} finally {
+			loading.value = false
+		}
+	}
+
+	// 开始编辑
+	const startEdit = () => {
+		originalUserInfo.value = JSON.parse(JSON.stringify(userInfo.value))
+		isEditing.value = true
+	}
+
+	// 取消编辑
+	const cancelEdit = () => {
+		userInfo.value = JSON.parse(JSON.stringify(originalUserInfo.value))
+		isEditing.value = false
+	}
+
+	// 保存修改
+	const saveChanges = async () => {
+		if (!formRef.value) return;
+
+		// 表单验证
+		formRef.value.validate(async (valid) => {
+			if (!valid) return; // 验证失败直接返回
+
+			try {
+				loading.value = true;
+
+				// 构建提交数据
+				const updateData = {
+					userId: userInfo.value.userId,
+					userCode: userInfo.value.userCode,
+					userName: userInfo.value.userName,
+					userPhone: userInfo.value.userPhone,
+					userAddr: userInfo.value.userAddr,
+					role: userInfo.value.role
+				};
+
+				// 特殊处理密码字段
+				if (userInfo.value.userPass !== '') {
+					updateData.userPass = userInfo.value.userPass;
+				} else if (originalUserInfo.value.userPass && userInfo.value.userPass === '') {
+					updateData.userPass = '';
+				}
+
+				console.log('提交的更新数据:', updateData);
+				// 调用后端接口
+				updUser(updateData).then(res => {
+					ElMessageBox.alert("修改成功！", {
+						type: 'info',
+					});
+					isEditing.value = false;
+				})
+
+
+			} finally {
+				loading.value = false;
+			}
+		});
+	};
+
+	onMounted(() => {
+		fetchUserInfo()
+	})
+</script>
+
+<style scoped>
+	/* 样式不变 */
+	.per-center {
+		padding: 20px;
+		max-width: 1000px;
+		margin: 0 auto;
+	}
+
+	.profile-card {
+		background: #fff;
+		border-radius: 8px;
+	}
+
+	/* ...其他样式 */
+</style>

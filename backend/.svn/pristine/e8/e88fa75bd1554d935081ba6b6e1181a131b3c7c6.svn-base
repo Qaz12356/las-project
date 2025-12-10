@@ -1,0 +1,46 @@
+import {
+	authenticate
+} from "@/apis/admin.js"
+export default {
+	namespaced: true,
+	state: {
+		adminInfo: {
+			adminCode: "",
+			adminName: ""
+		}
+	},
+	getters: {
+
+		getAdminInfo: function(state) {
+			return state.adminInfo;
+		}
+	},
+	mutations: {
+		//设置用户信息
+		setAdminLogin(state, payload) {
+			state.adminInfo.adminCode = payload.adminCode;
+			state.adminInfo.adminName = payload.adminName;
+			console.log("登陆者：", state.adminInfo.adminName)
+		},
+		//清理用户信息
+		clearAdminInfo(state) {
+
+		},
+
+	},
+	actions: {
+		loginLas(conText, param) {
+			authenticate(param.adminCode, param.adminPass).then(res => {
+				conText.commit("setAdminLogin", res);
+				//回调
+				if (param.success) {
+					param.success(res);
+				}
+			}, err => {
+				console.log("err:", err);
+			})
+		},
+
+
+	}
+}

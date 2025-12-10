@@ -1,0 +1,87 @@
+import {
+	authenticate
+} from "@/apis/user.js"
+export default {
+	namespaced: true,
+	state: {
+		userInfo: {
+			userCode: "",
+			userName: "",
+			userPhone: "",
+			userAddr: "",
+			role: ""
+		}
+	},
+	getters: {
+
+		getUserInfo: function(state) {
+			return state.userInfo;
+		}
+	},
+	mutations: {
+		//设置用户信息
+		setUserLogin(state, payload) {
+			// 保持现有数据，只更新提供的字段
+			state.userInfo = {
+				...state.userInfo,
+				...payload,
+				// 确保基本字段存在
+				userCode: payload.userCode || state.userInfo.userCode || '',
+				userName: payload.userName || state.userInfo.userName || '',
+				userPhone: payload.userPhone || state.userInfo.userPhone || '',
+				userAddr: payload.userAddr || state.userInfo.userAddr || '',
+				role: payload.role || state.userInfo.role || 'user'
+			};
+			console.log("登陆者信息更新：", state.userInfo);
+		},
+		setUserInfo(state, payload) {
+			state.userInfo = { ...state.userInfo, ...payload };
+			console.log("更新用户信息：", state.userInfo)
+		},
+		//清理用户信息
+		clearUserInfo(state) {
+			state.userInfo = {
+				userCode: "",
+				userName: "",
+				userPhone: "",
+				userAddr: "",
+				role: ""
+			};
+		},
+
+	},
+	actions: {
+		// loginLas(conText, param) { // conText 是 Vuex 的上下文对象
+		//   authenticate(param.userCode, param.userPass,param.role).then(res => {
+		//     // 1. 提取 param 中的业务参数（userCode、userPass）调用后端接口
+		//     // 2. 登录成功后，通过 commit 更新用户状态
+		//     conText.commit("setUserLogin", res); 
+		//     // 3. 执行 param 中的 success 回调（如果存在）
+		//     if (param.success) { 
+		//       param.success(res); // 将后端返回的结果 res 传递给回调函数
+		//     }
+		//   }, err => {
+		//     console.log("err:", err); // 打印错误信息
+		//     // 注意：这里未处理 param.error 回调，可优化为：
+		//     // if (param.error) param.error(err);
+		//   });
+		
+	  loginLas(conText, param) {// conText 是 Vuex 的上下文对象
+	    authenticate(param.userCode, param.userPass, param.role).then(res => {
+			// 1. 提取 param 中的业务参数（userCode、userPass,role）调用后端接口
+			//      2. 登录成功后，通过 commit 更新用户状态
+	      conText.commit("setUserLogin", {
+	        ...res,
+	        role: param.role // 确保角色信息被保存
+	      });
+	      if (param.success) param.success(res);
+	    }).catch(err => {
+	      console.error("登录失败:", err);
+	      if (param.error) param.error(err);
+	    });
+	  }
+
+
+
+	}
+}

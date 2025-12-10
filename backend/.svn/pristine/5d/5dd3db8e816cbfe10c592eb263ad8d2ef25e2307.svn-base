@@ -1,0 +1,103 @@
+package com.cjxy.las.action;
+
+import java.util.List;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.cjxy.las.bean.LostType;
+import com.cjxy.las.service.LostTypeService;
+import com.cjxy.las.utils.RespBody;
+
+import jakarta.annotation.Resource;
+
+@RestController
+@RequestMapping("/api/lostType")
+public class LostTypeAction {
+
+	@Resource
+	private LostTypeService lostTypeService;
+	
+	
+	
+	@PostMapping("/findLostType")
+	public RespBody<List<LostType>> findLostType(String lostTypeName) {
+		RespBody<List<LostType>> body=new RespBody<>();
+		try {
+			List<LostType>  ls=lostTypeService.queryLostType(lostTypeName);
+			body.setCode(RespBody.SUCCESS);
+			body.setData(ls);
+		} catch (Exception e) {
+			e.printStackTrace();
+			body.setCode(500,e.toString());
+		}
+		return body;
+	}
+	
+	@PostMapping("/findAllLostType")
+	public RespBody<List<LostType>> findAllLostType() {
+		RespBody<List<LostType>> body=new RespBody<>();
+		try {
+			List<LostType>  ls=lostTypeService.queryAllLostType();
+			body.setCode(RespBody.SUCCESS);
+			body.setData(ls);
+		} catch (Exception e) {
+			e.printStackTrace();
+			body.setCode(500,e.toString());
+		}
+		return body;
+	}
+	
+	
+	
+	
+	@PostMapping("/addLostType")
+	public RespBody<Void> addLostType(LostType lostType) {
+		RespBody<Void> body=new RespBody<>();
+		try {
+			String  mess=lostTypeService.addLostType(lostType);
+			if ("success".equals(mess)) {
+				body.setCode(RespBody.SUCCESS);
+			}else {
+				body.setCode(10001);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			body.setCode(500,e.toString());
+			
+		}
+		return body;
+	}
+	
+	@PostMapping("/updLostType")
+	public RespBody<Void> updLostType(LostType lostType) {
+		RespBody<Void> body=new RespBody<>();
+		try {
+			String  mess=lostTypeService.updLostType(lostType);
+			if ("success".equals(mess)) {
+				body.setCode(RespBody.SUCCESS);
+			}else {
+				body.setCode(10001);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			body.setCode(500,e.toString());
+			
+		}
+		return body;
+	}
+	
+	@PostMapping("/delLostType")
+	public RespBody<Void> delLostType(Integer lostTypeId) {
+		RespBody<Void> body=new RespBody<>();
+		try {
+			lostTypeService.delLostType(lostTypeId);
+			body.setCode(RespBody.SUCCESS);
+		} catch (Exception e) {
+			e.printStackTrace();
+			body.setCode(500,e.toString());
+			
+		}
+		return body;
+	}
+}

@@ -1,0 +1,20 @@
+<template>
+	<!--el-config-provider 是element plus 提供的命名空间定义组件，还可以通过它进行国
+际化设置 -->
+	<el-config-provider>
+		<router-view></router-view>
+	</el-config-provider>
+</template>
+<script setup>
+</script>
+<style>
+	html,
+	body {
+		height: 100%;
+	}
+
+	#app {
+		height: 100%;
+		overflow: hidden;
+	}
+</style>

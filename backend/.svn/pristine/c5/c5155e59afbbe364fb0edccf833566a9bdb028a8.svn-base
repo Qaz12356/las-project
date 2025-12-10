@@ -1,0 +1,72 @@
+<template>
+	<el-row>
+		<el-col :span="10">
+			
+		</el-col>
+		<el-col :span="9">
+			
+					<h3>校园失物招领中心</h3>		
+						
+
+		</el-col>
+		<el-col :span="3">
+			<div style="height: 54px;line-height: 54px; text-align: center;">
+				欢迎您：{{userInfo.userName}}
+			</div>
+		</el-col>
+		<el-col :span="1">
+			<div style="height: 54px;line-height: 54px; text-align: center;">
+				<el-button size="small" @click="showLogoutConfirm">退出登录</el-button>
+			</div>
+		</el-col>
+		
+	</el-row>
+</template>
+
+<script setup>
+	import {
+		useRouter
+	} from "vue-router";
+	
+	import { ref } from 'vue';
+	import { Setting, House } from '@element-plus/icons-vue';
+	import { ElMessageBox } from 'element-plus';
+	
+	import {
+		useStore
+	} from 'vuex'
+	import {
+		refreshUser
+	} from "@/apis/user.js"
+	const store = useStore();
+	const router = useRouter();
+	let userInfo = computed(() => store.getters["user/getUserInfo"]);
+	if (undefined == userInfo.value.userName || userInfo.value.userName == "" || null == userInfo.value.userName) {
+		refreshUser().then(res => {
+			store.commit("user/setUserLogin", res);
+		})
+	}
+	
+	
+	
+	
+	const showLogoutConfirm = () => {
+	  ElMessageBox.confirm('确定要退出登录吗？', '提示', {
+	    confirmButtonText: '确定',
+	    cancelButtonText: '取消',
+	    type: 'warning'
+	  }).then(() => {
+	    // 清除本地存储的 token
+	    localStorage.removeItem('token');
+	    // 重定向到登录页，假设登录页路径为 /login
+		http://localhost:9090/book/#/
+	    router.push('/');
+	    console.log('用户已确认退出登录');
+	  }).catch(() => {
+	    console.log('用户取消了退出登录');
+	  });
+	};
+</script>
+
+<style scoped>
+</style>

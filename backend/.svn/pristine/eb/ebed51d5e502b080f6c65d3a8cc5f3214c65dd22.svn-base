@@ -1,0 +1,35 @@
+package com.cjxy.las.config;
+
+import java.util.Map;
+
+import org.springframework.web.servlet.HandlerInterceptor;
+
+import com.cjxy.las.utils.RespBody;
+import com.cjxy.las.utils.ResponseTool;
+
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
+public class AuthInterceptor implements HandlerInterceptor {
+	@Override
+	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
+			throws Exception {
+		System.out.println("sss");
+		log.info("拦截路径："+request.getRequestURI());
+		HttpSession session=request.getSession();
+		Object userCode=session.getAttribute("userCode");
+		if (null==userCode) {
+			RespBody<Map<String, Object>> body = new RespBody<>();
+			body.setCode(10002);
+			ResponseTool.writeToClient(response, body);
+			return false;
+		}else {
+			// 放开拦截
+			return true;
+		}
+		
+	}
+}

@@ -1,0 +1,296 @@
+2025-05-21 restartedMain INFO  [com.cjxy.las.LasApplication]- Starting LasApplication using Java 21.0.5 with PID 23712 (D:\11\2\eclipse1\las\target\classes started by 小葵葵 in D:\11\2\eclipse1\las)
+2025-05-21 restartedMain INFO  [com.cjxy.las.LasApplication]- The following 1 profile is active: "dev"
+2025-05-21 restartedMain INFO  [org.springframework.boot.devtools.env.DevToolsPropertyDefaultsPostProcessor]- Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-05-21 restartedMain INFO  [org.springframework.boot.devtools.env.DevToolsPropertyDefaultsPostProcessor]- For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-05-21 restartedMain INFO  [org.springframework.data.repository.config.RepositoryConfigurationDelegate]- Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-05-21 restartedMain INFO  [org.springframework.data.repository.config.RepositoryConfigurationDelegate]- Finished Spring Data repository scanning in 52 ms. Found 4 JPA repository interfaces.
+2025-05-21 restartedMain INFO  [org.springframework.boot.web.embedded.tomcat.TomcatWebServer]- Tomcat initialized with port 8080 (http)
+2025-05-21 restartedMain INFO  [org.apache.catalina.core.StandardService]- Starting service [Tomcat]
+2025-05-21 restartedMain INFO  [org.apache.catalina.core.StandardEngine]- Starting Servlet engine: [Apache Tomcat/10.1.36]
+2025-05-21 restartedMain INFO  [org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/las]]- Initializing Spring embedded WebApplicationContext
+2025-05-21 restartedMain INFO  [org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext]- Root WebApplicationContext: initialization completed in 995 ms
+2025-05-21 restartedMain INFO  [org.hibernate.jpa.internal.util.LogHelper]- HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-05-21 restartedMain INFO  [org.hibernate.Version]- HHH000412: Hibernate ORM core version 6.6.8.Final
+2025-05-21 restartedMain INFO  [org.hibernate.cache.internal.RegionFactoryInitiator]- HHH000026: Second-level cache disabled
+2025-05-21 restartedMain INFO  [org.springframework.orm.jpa.persistenceunit.SpringPersistenceUnitInfo]- No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-05-21 restartedMain INFO  [com.alibaba.druid.pool.DruidDataSource]- {dataSource-1} inited
+2025-05-21 restartedMain WARN  [org.hibernate.orm.deprecation]- HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-05-21 restartedMain INFO  [org.hibernate.orm.connections.pooling]- HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource '{
+	CreateTime:"2025-05-21 08:50:51",
+	ActiveCount:0,
+	PoolingCount:1,
+	CreateCount:1,
+	DestroyCount:0,
+	CloseCount:1,
+	ConnectCount:1,
+	Connections:[
+		{ID:1388377062, ConnectTime:"2025-05-21 08:50:52", UseCount:1, LastActiveTime:"2025-05-21 08:50:52"}
+	]
+}']
+	Database driver: undefined/unknown
+	Database version: 8.0.16
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-05-21 restartedMain INFO  [org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator]- HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-05-21 restartedMain INFO  [org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean]- Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-05-21 restartedMain INFO  [org.springframework.data.jpa.repository.query.QueryEnhancerFactory]- Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-05-21 restartedMain WARN  [org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration]- spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-05-21 restartedMain INFO  [org.springframework.boot.devtools.autoconfigure.OptionalLiveReloadServer]- LiveReload server is running on port 35729
+2025-05-21 restartedMain INFO  [org.springframework.boot.web.embedded.tomcat.TomcatWebServer]- Tomcat started on port 8080 (http) with context path '/las'
+2025-05-21 restartedMain INFO  [com.cjxy.las.LasApplication]- Started LasApplication in 3.343 seconds (process running for 3.971)
+2025-05-21 http-nio-8080-exec-1 INFO  [org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/las]]- Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-05-21 http-nio-8080-exec-1 INFO  [org.springframework.web.servlet.DispatcherServlet]- Initializing Servlet 'dispatcherServlet'
+2025-05-21 http-nio-8080-exec-1 INFO  [org.springframework.web.servlet.DispatcherServlet]- Completed initialization in 0 ms
+2025-05-21 RMI TCP Connection(117)-127.0.0.1 INFO  [org.springframework.boot.admin.SpringApplicationAdminMXBeanRegistrar$SpringApplicationAdmin]- Application shutdown requested.
+2025-05-21 RMI TCP Connection(117)-127.0.0.1 INFO  [org.springframework.boot.web.embedded.tomcat.GracefulShutdown]- Commencing graceful shutdown. Waiting for active requests to complete
+2025-05-21 tomcat-shutdown INFO  [org.springframework.boot.web.embedded.tomcat.GracefulShutdown]- Graceful shutdown complete
+2025-05-21 RMI TCP Connection(117)-127.0.0.1 INFO  [org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean]- Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-05-21 RMI TCP Connection(117)-127.0.0.1 INFO  [com.alibaba.druid.pool.DruidDataSource]- {dataSource-1} closing ...
+2025-05-21 RMI TCP Connection(117)-127.0.0.1 INFO  [com.alibaba.druid.pool.DruidDataSource]- {dataSource-1} closed
+2025-05-21 restartedMain INFO  [com.cjxy.las.LasApplication]- Starting LasApplication using Java 21.0.5 with PID 28860 (D:\11\2\eclipse1\las\target\classes started by 小葵葵 in D:\11\2\eclipse1\las)
+2025-05-21 restartedMain INFO  [com.cjxy.las.LasApplication]- The following 1 profile is active: "dev"
+2025-05-21 restartedMain INFO  [org.springframework.boot.devtools.env.DevToolsPropertyDefaultsPostProcessor]- Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-05-21 restartedMain INFO  [org.springframework.boot.devtools.env.DevToolsPropertyDefaultsPostProcessor]- For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-05-21 restartedMain INFO  [org.springframework.data.repository.config.RepositoryConfigurationDelegate]- Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-05-21 restartedMain INFO  [org.springframework.data.repository.config.RepositoryConfigurationDelegate]- Finished Spring Data repository scanning in 46 ms. Found 4 JPA repository interfaces.
+2025-05-21 restartedMain INFO  [org.springframework.boot.web.embedded.tomcat.TomcatWebServer]- Tomcat initialized with port 8080 (http)
+2025-05-21 restartedMain INFO  [org.apache.catalina.core.StandardService]- Starting service [Tomcat]
+2025-05-21 restartedMain INFO  [org.apache.catalina.core.StandardEngine]- Starting Servlet engine: [Apache Tomcat/10.1.36]
+2025-05-21 restartedMain INFO  [org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/las]]- Initializing Spring embedded WebApplicationContext
+2025-05-21 restartedMain INFO  [org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext]- Root WebApplicationContext: initialization completed in 929 ms
+2025-05-21 restartedMain INFO  [org.hibernate.jpa.internal.util.LogHelper]- HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-05-21 restartedMain INFO  [org.hibernate.Version]- HHH000412: Hibernate ORM core version 6.6.8.Final
+2025-05-21 restartedMain INFO  [org.hibernate.cache.internal.RegionFactoryInitiator]- HHH000026: Second-level cache disabled
+2025-05-21 restartedMain INFO  [org.springframework.orm.jpa.persistenceunit.SpringPersistenceUnitInfo]- No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-05-21 restartedMain INFO  [com.alibaba.druid.pool.DruidDataSource]- {dataSource-1} inited
+2025-05-21 restartedMain WARN  [org.hibernate.orm.deprecation]- HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-05-21 restartedMain INFO  [org.hibernate.orm.connections.pooling]- HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource '{
+	CreateTime:"2025-05-21 11:21:17",
+	ActiveCount:0,
+	PoolingCount:1,
+	CreateCount:1,
+	DestroyCount:0,
+	CloseCount:1,
+	ConnectCount:1,
+	Connections:[
+		{ID:1597514752, ConnectTime:"2025-05-21 11:21:18", UseCount:1, LastActiveTime:"2025-05-21 11:21:18"}
+	]
+}']
+	Database driver: undefined/unknown
+	Database version: 8.0.16
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-05-21 restartedMain INFO  [org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator]- HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-05-21 restartedMain INFO  [org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean]- Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-05-21 restartedMain INFO  [org.springframework.data.jpa.repository.query.QueryEnhancerFactory]- Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-05-21 restartedMain WARN  [org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration]- spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-05-21 restartedMain INFO  [org.springframework.boot.devtools.autoconfigure.OptionalLiveReloadServer]- LiveReload server is running on port 35729
+2025-05-21 restartedMain INFO  [org.springframework.boot.web.embedded.tomcat.TomcatWebServer]- Tomcat started on port 8080 (http) with context path '/las'
+2025-05-21 restartedMain INFO  [com.cjxy.las.LasApplication]- Started LasApplication in 3.22 seconds (process running for 3.853)
+2025-05-21 http-nio-8080-exec-1 INFO  [org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/las]]- Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-05-21 http-nio-8080-exec-1 INFO  [org.springframework.web.servlet.DispatcherServlet]- Initializing Servlet 'dispatcherServlet'
+2025-05-21 http-nio-8080-exec-1 INFO  [org.springframework.web.servlet.DispatcherServlet]- Completed initialization in 1 ms
+2025-05-21 RMI TCP Connection(4)-127.0.0.1 INFO  [org.springframework.boot.admin.SpringApplicationAdminMXBeanRegistrar$SpringApplicationAdmin]- Application shutdown requested.
+2025-05-21 RMI TCP Connection(4)-127.0.0.1 INFO  [org.springframework.boot.web.embedded.tomcat.GracefulShutdown]- Commencing graceful shutdown. Waiting for active requests to complete
+2025-05-21 tomcat-shutdown INFO  [org.springframework.boot.web.embedded.tomcat.GracefulShutdown]- Graceful shutdown complete
+2025-05-21 RMI TCP Connection(4)-127.0.0.1 INFO  [org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean]- Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-05-21 RMI TCP Connection(4)-127.0.0.1 INFO  [com.alibaba.druid.pool.DruidDataSource]- {dataSource-1} closing ...
+2025-05-21 RMI TCP Connection(4)-127.0.0.1 INFO  [com.alibaba.druid.pool.DruidDataSource]- {dataSource-1} closed
+2025-05-21 restartedMain INFO  [com.cjxy.las.LasApplication]- Starting LasApplication using Java 21.0.5 with PID 15676 (D:\11\2\eclipse1\las\target\classes started by 小葵葵 in D:\11\2\eclipse1\las)
+2025-05-21 restartedMain INFO  [com.cjxy.las.LasApplication]- The following 1 profile is active: "dev"
+2025-05-21 restartedMain INFO  [org.springframework.boot.devtools.env.DevToolsPropertyDefaultsPostProcessor]- Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-05-21 restartedMain INFO  [org.springframework.boot.devtools.env.DevToolsPropertyDefaultsPostProcessor]- For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-05-21 restartedMain INFO  [org.springframework.data.repository.config.RepositoryConfigurationDelegate]- Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-05-21 restartedMain INFO  [org.springframework.data.repository.config.RepositoryConfigurationDelegate]- Finished Spring Data repository scanning in 49 ms. Found 4 JPA repository interfaces.
+2025-05-21 restartedMain INFO  [org.springframework.boot.web.embedded.tomcat.TomcatWebServer]- Tomcat initialized with port 8080 (http)
+2025-05-21 restartedMain INFO  [org.apache.catalina.core.StandardService]- Starting service [Tomcat]
+2025-05-21 restartedMain INFO  [org.apache.catalina.core.StandardEngine]- Starting Servlet engine: [Apache Tomcat/10.1.36]
+2025-05-21 restartedMain INFO  [org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/las]]- Initializing Spring embedded WebApplicationContext
+2025-05-21 restartedMain INFO  [org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext]- Root WebApplicationContext: initialization completed in 918 ms
+2025-05-21 restartedMain INFO  [org.hibernate.jpa.internal.util.LogHelper]- HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-05-21 restartedMain INFO  [org.hibernate.Version]- HHH000412: Hibernate ORM core version 6.6.8.Final
+2025-05-21 restartedMain INFO  [org.hibernate.cache.internal.RegionFactoryInitiator]- HHH000026: Second-level cache disabled
+2025-05-21 restartedMain INFO  [org.springframework.orm.jpa.persistenceunit.SpringPersistenceUnitInfo]- No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-05-21 restartedMain INFO  [com.alibaba.druid.pool.DruidDataSource]- {dataSource-1} inited
+2025-05-21 restartedMain WARN  [org.hibernate.orm.deprecation]- HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-05-21 restartedMain INFO  [org.hibernate.orm.connections.pooling]- HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource '{
+	CreateTime:"2025-05-21 11:25:08",
+	ActiveCount:0,
+	PoolingCount:1,
+	CreateCount:1,
+	DestroyCount:0,
+	CloseCount:1,
+	ConnectCount:1,
+	Connections:[
+		{ID:608641229, ConnectTime:"2025-05-21 11:25:09", UseCount:1, LastActiveTime:"2025-05-21 11:25:09"}
+	]
+}']
+	Database driver: undefined/unknown
+	Database version: 8.0.16
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-05-21 restartedMain INFO  [org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator]- HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-05-21 restartedMain INFO  [org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean]- Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-05-21 restartedMain INFO  [org.springframework.data.jpa.repository.query.QueryEnhancerFactory]- Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-05-21 restartedMain WARN  [org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration]- spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-05-21 restartedMain INFO  [org.springframework.boot.devtools.autoconfigure.OptionalLiveReloadServer]- LiveReload server is running on port 35729
+2025-05-21 restartedMain INFO  [org.springframework.boot.web.embedded.tomcat.TomcatWebServer]- Tomcat started on port 8080 (http) with context path '/las'
+2025-05-21 restartedMain INFO  [com.cjxy.las.LasApplication]- Started LasApplication in 3.097 seconds (process running for 3.72)
+2025-05-21 http-nio-8080-exec-1 INFO  [org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/las]]- Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-05-21 http-nio-8080-exec-1 INFO  [org.springframework.web.servlet.DispatcherServlet]- Initializing Servlet 'dispatcherServlet'
+2025-05-21 http-nio-8080-exec-1 INFO  [org.springframework.web.servlet.DispatcherServlet]- Completed initialization in 1 ms
+2025-05-21 http-nio-8080-exec-4 WARN  [org.hibernate.engine.jdbc.spi.SqlExceptionHelper]- SQL Error: 1451, SQLState: 23000
+2025-05-21 http-nio-8080-exec-4 ERROR [org.hibernate.engine.jdbc.spi.SqlExceptionHelper]- Cannot delete or update a parent row: a foreign key constraint fails (`las`.`lost`, CONSTRAINT `FKjaep6i8wl7yqgjd2yh3tes2pe` FOREIGN KEY (`lostTypeId`) REFERENCES `losttype` (`lostTypeId`))
+2025-05-21 File Watcher INFO  [org.springframework.boot.devtools.autoconfigure.LocalDevToolsAutoConfiguration$RestartingClassPathChangeChangedEventListener]- Restarting due to 1 class path change (0 additions, 0 deletions, 1 modification)
+2025-05-21 Thread-5 INFO  [org.springframework.boot.web.embedded.tomcat.GracefulShutdown]- Commencing graceful shutdown. Waiting for active requests to complete
+2025-05-21 tomcat-shutdown INFO  [org.springframework.boot.web.embedded.tomcat.GracefulShutdown]- Graceful shutdown complete
+2025-05-21 Thread-5 INFO  [org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean]- Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-05-21 Thread-5 INFO  [com.alibaba.druid.pool.DruidDataSource]- {dataSource-1} closing ...
+2025-05-21 Thread-5 INFO  [com.alibaba.druid.pool.DruidDataSource]- {dataSource-1} closed
+2025-05-21 restartedMain INFO  [com.cjxy.las.LasApplication]- Starting LasApplication using Java 21.0.5 with PID 15676 (D:\11\2\eclipse1\las\target\classes started by 小葵葵 in D:\11\2\eclipse1\las)
+2025-05-21 restartedMain INFO  [com.cjxy.las.LasApplication]- The following 1 profile is active: "dev"
+2025-05-21 restartedMain INFO  [org.springframework.data.repository.config.RepositoryConfigurationDelegate]- Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-05-21 restartedMain INFO  [org.springframework.data.repository.config.RepositoryConfigurationDelegate]- Finished Spring Data repository scanning in 21 ms. Found 4 JPA repository interfaces.
+2025-05-21 restartedMain INFO  [org.springframework.boot.web.embedded.tomcat.TomcatWebServer]- Tomcat initialized with port 8080 (http)
+2025-05-21 restartedMain INFO  [org.apache.catalina.core.StandardService]- Starting service [Tomcat]
+2025-05-21 restartedMain INFO  [org.apache.catalina.core.StandardEngine]- Starting Servlet engine: [Apache Tomcat/10.1.36]
+2025-05-21 restartedMain INFO  [org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/las]]- Initializing Spring embedded WebApplicationContext
+2025-05-21 restartedMain INFO  [org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext]- Root WebApplicationContext: initialization completed in 259 ms
+2025-05-21 restartedMain INFO  [org.hibernate.jpa.internal.util.LogHelper]- HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-05-21 restartedMain INFO  [org.hibernate.cache.internal.RegionFactoryInitiator]- HHH000026: Second-level cache disabled
+2025-05-21 restartedMain INFO  [org.springframework.orm.jpa.persistenceunit.SpringPersistenceUnitInfo]- No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-05-21 restartedMain INFO  [com.alibaba.druid.pool.DruidDataSource]- {dataSource-2} inited
+2025-05-21 restartedMain WARN  [org.hibernate.orm.deprecation]- HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-05-21 restartedMain INFO  [org.hibernate.orm.connections.pooling]- HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource '{
+	CreateTime:"2025-05-21 11:37:04",
+	ActiveCount:0,
+	PoolingCount:1,
+	CreateCount:1,
+	DestroyCount:0,
+	CloseCount:1,
+	ConnectCount:1,
+	Connections:[
+		{ID:1341786178, ConnectTime:"2025-05-21 11:37:04", UseCount:1, LastActiveTime:"2025-05-21 11:37:04"}
+	]
+}']
+	Database driver: undefined/unknown
+	Database version: 8.0.16
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-05-21 restartedMain INFO  [org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator]- HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-05-21 restartedMain INFO  [org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean]- Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-05-21 restartedMain WARN  [org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration]- spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-05-21 restartedMain INFO  [org.springframework.boot.devtools.autoconfigure.OptionalLiveReloadServer]- LiveReload server is running on port 35729
+2025-05-21 restartedMain INFO  [org.springframework.boot.web.embedded.tomcat.TomcatWebServer]- Tomcat started on port 8080 (http) with context path '/las'
+2025-05-21 restartedMain INFO  [com.cjxy.las.LasApplication]- Started LasApplication in 0.669 seconds (process running for 717.965)
+2025-05-21 restartedMain INFO  [org.springframework.boot.devtools.autoconfigure.ConditionEvaluationDeltaLoggingListener]- Condition evaluation unchanged
+2025-05-21 File Watcher INFO  [org.springframework.boot.devtools.autoconfigure.LocalDevToolsAutoConfiguration$RestartingClassPathChangeChangedEventListener]- Restarting due to 14606 class path changes (14606 additions, 0 deletions, 0 modifications)
+2025-05-21 Thread-7 INFO  [org.springframework.boot.web.embedded.tomcat.GracefulShutdown]- Commencing graceful shutdown. Waiting for active requests to complete
+2025-05-21 tomcat-shutdown INFO  [org.springframework.boot.web.embedded.tomcat.GracefulShutdown]- Graceful shutdown complete
+2025-05-21 Thread-7 INFO  [org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean]- Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-05-21 Thread-7 INFO  [com.alibaba.druid.pool.DruidDataSource]- {dataSource-2} closing ...
+2025-05-21 Thread-7 INFO  [com.alibaba.druid.pool.DruidDataSource]- {dataSource-2} closed
+2025-05-21 restartedMain INFO  [com.cjxy.las.LasApplication]- Starting LasApplication using Java 21.0.5 with PID 15676 (D:\11\2\eclipse1\las\target\classes started by 小葵葵 in D:\11\2\eclipse1\las)
+2025-05-21 restartedMain INFO  [com.cjxy.las.LasApplication]- The following 1 profile is active: "dev"
+2025-05-21 restartedMain INFO  [org.springframework.data.repository.config.RepositoryConfigurationDelegate]- Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-05-21 restartedMain INFO  [org.springframework.data.repository.config.RepositoryConfigurationDelegate]- Finished Spring Data repository scanning in 20 ms. Found 4 JPA repository interfaces.
+2025-05-21 restartedMain INFO  [org.springframework.boot.web.embedded.tomcat.TomcatWebServer]- Tomcat initialized with port 8080 (http)
+2025-05-21 restartedMain INFO  [org.apache.catalina.core.StandardService]- Starting service [Tomcat]
+2025-05-21 restartedMain INFO  [org.apache.catalina.core.StandardEngine]- Starting Servlet engine: [Apache Tomcat/10.1.36]
+2025-05-21 restartedMain INFO  [org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/las]]- Initializing Spring embedded WebApplicationContext
+2025-05-21 restartedMain INFO  [org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext]- Root WebApplicationContext: initialization completed in 226 ms
+2025-05-21 restartedMain INFO  [org.hibernate.jpa.internal.util.LogHelper]- HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-05-21 restartedMain INFO  [org.hibernate.cache.internal.RegionFactoryInitiator]- HHH000026: Second-level cache disabled
+2025-05-21 restartedMain INFO  [org.springframework.orm.jpa.persistenceunit.SpringPersistenceUnitInfo]- No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-05-21 restartedMain INFO  [com.alibaba.druid.pool.DruidDataSource]- {dataSource-3} inited
+2025-05-21 restartedMain WARN  [org.hibernate.orm.deprecation]- HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-05-21 restartedMain INFO  [org.hibernate.orm.connections.pooling]- HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource '{
+	CreateTime:"2025-05-21 11:37:36",
+	ActiveCount:0,
+	PoolingCount:1,
+	CreateCount:1,
+	DestroyCount:0,
+	CloseCount:1,
+	ConnectCount:1,
+	Connections:[
+		{ID:436720968, ConnectTime:"2025-05-21 11:37:36", UseCount:1, LastActiveTime:"2025-05-21 11:37:36"}
+	]
+}']
+	Database driver: undefined/unknown
+	Database version: 8.0.16
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-05-21 restartedMain INFO  [org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator]- HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-05-21 restartedMain INFO  [org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean]- Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-05-21 restartedMain WARN  [org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration]- spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-05-21 restartedMain INFO  [org.springframework.boot.devtools.autoconfigure.OptionalLiveReloadServer]- LiveReload server is running on port 35729
+2025-05-21 restartedMain INFO  [org.springframework.boot.web.embedded.tomcat.TomcatWebServer]- Tomcat started on port 8080 (http) with context path '/las'
+2025-05-21 restartedMain INFO  [com.cjxy.las.LasApplication]- Started LasApplication in 0.593 seconds (process running for 750.402)
+2025-05-21 restartedMain INFO  [org.springframework.boot.devtools.autoconfigure.ConditionEvaluationDeltaLoggingListener]- Condition evaluation unchanged
+2025-05-21 File Watcher INFO  [org.springframework.boot.devtools.autoconfigure.LocalDevToolsAutoConfiguration$RestartingClassPathChangeChangedEventListener]- Restarting due to 1 class path change (0 additions, 0 deletions, 1 modification)
+2025-05-21 Thread-11 INFO  [org.springframework.boot.web.embedded.tomcat.GracefulShutdown]- Commencing graceful shutdown. Waiting for active requests to complete
+2025-05-21 tomcat-shutdown INFO  [org.springframework.boot.web.embedded.tomcat.GracefulShutdown]- Graceful shutdown complete
+2025-05-21 Thread-11 INFO  [org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean]- Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-05-21 Thread-11 INFO  [com.alibaba.druid.pool.DruidDataSource]- {dataSource-3} closing ...
+2025-05-21 Thread-11 INFO  [com.alibaba.druid.pool.DruidDataSource]- {dataSource-3} closed
+2025-05-21 restartedMain INFO  [com.cjxy.las.LasApplication]- Starting LasApplication using Java 21.0.5 with PID 15676 (D:\11\2\eclipse1\las\target\classes started by 小葵葵 in D:\11\2\eclipse1\las)
+2025-05-21 restartedMain INFO  [com.cjxy.las.LasApplication]- The following 1 profile is active: "dev"
+2025-05-21 restartedMain INFO  [org.springframework.data.repository.config.RepositoryConfigurationDelegate]- Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-05-21 restartedMain INFO  [org.springframework.data.repository.config.RepositoryConfigurationDelegate]- Finished Spring Data repository scanning in 19 ms. Found 4 JPA repository interfaces.
+2025-05-21 restartedMain INFO  [org.springframework.boot.web.embedded.tomcat.TomcatWebServer]- Tomcat initialized with port 8080 (http)
+2025-05-21 restartedMain INFO  [org.apache.catalina.core.StandardService]- Starting service [Tomcat]
+2025-05-21 restartedMain INFO  [org.apache.catalina.core.StandardEngine]- Starting Servlet engine: [Apache Tomcat/10.1.36]
+2025-05-21 restartedMain INFO  [org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/las]]- Initializing Spring embedded WebApplicationContext
+2025-05-21 restartedMain INFO  [org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext]- Root WebApplicationContext: initialization completed in 233 ms
+2025-05-21 restartedMain INFO  [org.hibernate.jpa.internal.util.LogHelper]- HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-05-21 restartedMain INFO  [org.hibernate.cache.internal.RegionFactoryInitiator]- HHH000026: Second-level cache disabled
+2025-05-21 restartedMain INFO  [org.springframework.orm.jpa.persistenceunit.SpringPersistenceUnitInfo]- No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-05-21 restartedMain INFO  [com.alibaba.druid.pool.DruidDataSource]- {dataSource-4} inited
+2025-05-21 restartedMain WARN  [org.hibernate.orm.deprecation]- HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-05-21 restartedMain INFO  [org.hibernate.orm.connections.pooling]- HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource '{
+	CreateTime:"2025-05-21 11:38:54",
+	ActiveCount:0,
+	PoolingCount:1,
+	CreateCount:1,
+	DestroyCount:0,
+	CloseCount:1,
+	ConnectCount:1,
+	Connections:[
+		{ID:723557511, ConnectTime:"2025-05-21 11:38:54", UseCount:1, LastActiveTime:"2025-05-21 11:38:54"}
+	]
+}']
+	Database driver: undefined/unknown
+	Database version: 8.0.16
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-05-21 restartedMain INFO  [org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator]- HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-05-21 restartedMain INFO  [org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean]- Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-05-21 restartedMain WARN  [org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration]- spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-05-21 restartedMain INFO  [org.springframework.boot.devtools.autoconfigure.OptionalLiveReloadServer]- LiveReload server is running on port 35729
+2025-05-21 restartedMain INFO  [org.springframework.boot.web.embedded.tomcat.TomcatWebServer]- Tomcat started on port 8080 (http) with context path '/las'
+2025-05-21 restartedMain INFO  [com.cjxy.las.LasApplication]- Started LasApplication in 0.555 seconds (process running for 828.002)
+2025-05-21 restartedMain INFO  [org.springframework.boot.devtools.autoconfigure.ConditionEvaluationDeltaLoggingListener]- Condition evaluation unchanged
+2025-05-21 RMI TCP Connection(21)-127.0.0.1 INFO  [org.springframework.boot.admin.SpringApplicationAdminMXBeanRegistrar$SpringApplicationAdmin]- Application shutdown requested.
+2025-05-21 RMI TCP Connection(21)-127.0.0.1 INFO  [org.springframework.boot.web.embedded.tomcat.GracefulShutdown]- Commencing graceful shutdown. Waiting for active requests to complete
+2025-05-21 tomcat-shutdown INFO  [org.springframework.boot.web.embedded.tomcat.GracefulShutdown]- Graceful shutdown complete
+2025-05-21 RMI TCP Connection(21)-127.0.0.1 INFO  [org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean]- Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-05-21 RMI TCP Connection(21)-127.0.0.1 INFO  [com.alibaba.druid.pool.DruidDataSource]- {dataSource-4} closing ...
+2025-05-21 RMI TCP Connection(21)-127.0.0.1 INFO  [com.alibaba.druid.pool.DruidDataSource]- {dataSource-4} closed

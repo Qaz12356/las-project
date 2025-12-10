@@ -1,0 +1,221 @@
+<template>
+    <div class="centered-container">
+        <div title="上传失物" style="width: 400px;">
+            <el-form :model="lostForm" :rules="rules" ref="lostRef">
+                <el-form-item label="失物名称" :label-width="80" prop="lostName">
+                    <el-input v-model="lostForm.lostName" />
+                </el-form-item>
+                <el-form-item label="拾到地址" :label-width="80" prop="lostAddr">
+                    <el-input v-model="lostForm.lostAddr" />
+                </el-form-item>
+                <el-form-item label="拾到时间" :label-width="80" prop="lostDate">
+                    <el-date-picker v-model="lostForm.lostDate" type="date" placeholder="选择日期" size="default"
+                        format="YYYY-MM-DD" value-format="YYYY-MM-DD" />
+                </el-form-item>
+                <el-form-item label="失物类型" :label-width="80" prop="lostTypeId">
+                    <el-select v-model="lostForm.lostTypeId" placeholder="选择类型" size="default">
+                        <el-option v-for="item in lostTypeOpts" :key="item.lostTypeId" :label="item.lostTypeName"
+                            :value="item.lostTypeId" />
+                    </el-select>
+                </el-form-item>
+				<el-form-item label="失物描述" :label-width="80" prop="lostDespn">
+					<el-input v-model="lostForm.lostDespn" />
+				</el-form-item>
+                <el-form-item label="失物图片" :label-width="80">
+                    <el-upload v-model:file-list="fileList" ref="upload" :action="actionUrl" list-type="picture"
+                        method="post" :data="lostForm" :multiple="false" accept=".jpg,.png" :on-exceed="handleExceed"
+                        :auto-upload="false" :on-success="handleSuccess" :before-upload="handleBefore"
+                        :on-error="handleError" :limit="1" :with-credentials="true">
+                        <el-button type="primary">选择图片</el-button>
+                        <template #tip>
+                            <div class="el-upload__tip">
+                                图片(jpg/png)大小不能超过1M。
+                            </div>
+                        </template>
+                    </el-upload>
+                </el-form-item>
+            </el-form>
+            <div class="dialog-footer">
+                <el-button @click="dlgLostVisible = false">取消</el-button>
+                <el-button type="primary" @click="saveLost">确定</el-button>
+            </div>
+        </div>
+    </div>
+</template>
+
+<script setup>
+import {
+    reactive,
+    ref,
+    onMounted
+} from 'vue';
+import {
+    ElMessageBox,
+    ElMessage
+} from 'element-plus';
+// 这里假设 regCfg 已经正确导入
+import {
+    regCfg
+} from "@/utils/config.js";
+// 这里假设 findLost、updLost、delLost、findAllLostType 已经正确导入
+import {
+    findLost,
+    updLost,
+    delLost
+} from '@/apis/lost.js';
+import {
+    findAllLostType
+} from "@/apis/lostType.js";
+
+let queryForm = reactive({
+    lostName: "",
+    lostTypeId: 0,
+    pageNo: 1,
+    pageSize: 10
+})
+
+let lostTypeOpts = reactive([{
+    lostTypeId: 0,
+    lostTypeName: "--请选择--"
+}]);
+
+let tblLoading = ref(false);
+let tableData = reactive({
+    rows: [],
+    total: 0
+})
+
+// 初始化页面
+function initPage() {
+    lostTypeOpts.length = 0;
+    findAllLostType().then(res => {
+        lostTypeOpts.push({
+            lostTypeId: 0,
+            lostTypeName: "--请选择--"
+        })
+        for (let i = 0; i < res.length; i++) {
+            let tmp = {
+                lostTypeId: res[i].lostTypeId,
+                lostTypeName: res[i].lostTypeName
+            }
+            lostTypeOpts.push(tmp)
+        }
+    })
+}
+
+// 上传
+let dlgLostVisible = ref(false)
+const lostForm = reactive({
+    lostAddr: "",
+    lostName: "",
+    lostTypeId: 0,
+	lostDespn:"",
+    lostDate: ""
+})
+
+let rules = {
+    lostName: [{
+            required: true,
+            message: '请输入失物名称',
+            trigger: 'blur'
+        },
+        {
+            min: 2,
+            max: 50,
+            message: '失物名称长度为2 - 50',
+            trigger: 'blur'
+        }
+    ],
+    lostDate: [{
+        required: true,
+        message: '请输入拾到时间',
+        trigger: 'blur'
+    }],
+    lostTypeId: [{
+        required: true,
+        message: '请选择类型',
+        trigger: 'blur',
+        validator: (rule, value, callback) => {
+            if (value == 0) {
+                callback(new Error('请选择类型'));
+            } else {
+                callback();
+            }
+        }
+    }]
+}
+
+let lostRef = ref();
+let actionUrl = ref(regCfg.baseURL + "/lost/uploadFile");
+
+const fileList = reactive([])
+const upload = ref()
+
+function handleBefore(file) {
+    console.log("handleBefore.........", file.size);
+    // 不能大于 1MB
+    if (file.size > 10 * 1024 * 1024) {
+        ElMessageBox.alert("不能上传超过 10M 的文件", {
+            type: 'error'
+        });
+        return false; // 阻止文件上传
+    }
+    return true; // 允许文件上传
+}
+
+function handleExceed(files, uploadFiles) {
+    console.log(files);
+    console.log(uploadFiles);
+    upload.value.clearFiles();
+    upload.value.handleStart(files[0]);
+}
+
+function handleSuccess(response, uploadFile, uploadFiles) {
+    console.log("handleSuccess:", response);
+}
+
+function handleError(error, uploadFile, uploadFiles) {
+    console.log("handleError:", error);
+}
+
+function saveLost() {
+    console.log("saveLost..........")
+    lostRef.value.validate((valid, fields) => {
+        if (valid) {
+            ElMessageBox.confirm('是否要提交？', '提示', {
+                confirmButtonText: '确定',
+                cancelButtonText: '取消',
+                type: 'warning'
+            }).then(() => {
+                upload.value.submit();
+                dlgLostVisible.value = false;
+                ElMessage.success('提交成功');
+                // 清除表单内容
+                lostForm.lostAddr = "";
+                lostForm.lostName = "";
+                lostForm.lostTypeId = 0;
+                lostForm.lostDate = "";
+				lostForm.lostDespn="";
+                // 清除文件列表，并且调用 el-upload 实例的 clearFiles 方法
+                fileList.length = 0;
+                upload.value.clearFiles(); 
+            }).catch(() => {
+                // 用户取消提交
+            });
+        }
+    });
+}
+
+onMounted(() => {
+    initPage();
+})
+</script>
+
+<style scoped>
+.centered-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+</style>    

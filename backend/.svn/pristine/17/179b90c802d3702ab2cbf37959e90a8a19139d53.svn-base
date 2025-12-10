@@ -1,0 +1,132 @@
+package com.cjxy.las.action;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import org.springframework.data.domain.Page;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.cjxy.las.bean.Claiminfo;
+import com.cjxy.las.bean.Lost;
+import com.cjxy.las.service.ClaiminfoService;
+import com.cjxy.las.utils.RespBody;
+
+import jakarta.annotation.Resource;
+@RestController
+@RequestMapping("/api/claiminfo")
+public class ClaiminfoAction {
+	
+	
+	
+
+		@Resource
+		private ClaiminfoService claiminfoService;
+	
+		
+		@PostMapping("/findClaiminfo")
+		public RespBody<Map<String,Object>> findClaiminfo(String claimName,Integer lostId,int pageNo,int pageSize) {
+			RespBody<Map<String,Object>> body=new RespBody<>();
+			try {
+				Page<Claiminfo>  pg=claiminfoService.queryClaiminfo(claimName, lostId, pageNo, pageSize);
+				Map<String,Object> data=new HashMap<>();
+				data.put("rows", pg.getContent());
+				data.put("total", pg.getTotalElements());
+				body.setData(data);
+				body.setCode(RespBody.SUCCESS);
+			} catch (Exception e) {
+				e.printStackTrace();
+				body.setCode(500,e.toString());
+			}
+			return body;
+		}
+		
+
+		@PostMapping("/addClaiminfo")
+		public RespBody<Void> addClaiminfo(Claiminfo claiminfo,Integer lostId ) {
+			RespBody<Void> body=new RespBody<>();
+			try {
+				
+				Lost lost=new Lost();
+				lost.setLostId(lostId);
+				String  mess=claiminfoService.addClaiminfo(claiminfo, lost);
+				if ("success".equals(mess)) {
+					body.setCode(RespBody.SUCCESS);
+				}else {
+					body.setCode(10001);
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+				body.setCode(500,e.toString());
+				
+			}
+			return body;
+		}
+		@PostMapping("/updClaiminfo")
+		public RespBody<Void> updClaiminfo(Claiminfo claiminfo,Lost lost) {
+			RespBody<Void> body=new RespBody<>();
+			try {
+				String  mess=claiminfoService.updClaiminfo(claiminfo,lost);
+				if ("success".equals(mess)) {
+					body.setCode(RespBody.SUCCESS);
+				}else {
+					body.setCode(10001);
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+				body.setCode(500,e.toString());
+				
+			}
+			return body;
+		}
+
+
+@PostMapping("/updClaimin")
+public RespBody<Void> updClaimin(Claiminfo claiminfo,Lost lost) {
+	RespBody<Void> body = new RespBody<>();
+	try {
+		String mess = claiminfoService.updClaimin(claiminfo,lost);
+		if ("success".equals(mess)) {
+			body.setCode(RespBody.SUCCESS);
+		} else {
+			body.setCode(10001);
+		}
+	} catch (Exception e) {
+		e.printStackTrace();
+		body.setCode(500, e.toString());
+
+	}
+	return body;
+}
+}
+		
+//		@PostMapping("/updateClaimInfo")
+//		public ResponseEntity<Claiminfo> updateClaimInfo(@RequestParam Integer claimId, @RequestBody Claiminfo updatedClaimInfo) {
+//		    Claiminfo result = claiminfoService.updateClaimInfo(claimId, updatedClaimInfo);
+//		    if (result!= null) {
+//		        return new ResponseEntity<>(result, HttpStatus.OK);
+//		    }
+//		    return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+//		}
+//		
+//		@PostMapping("/delClaim")
+//		public RespBody<Void> delLost(Integer claimId) {
+//			RespBody<Void> body=new RespBody<>();
+//			try {
+//				claiminfoService.delClaim(claimId);
+//				body.setCode(RespBody.SUCCESS);
+//			} catch (Exception e) {
+//				e.printStackTrace();
+//				body.setCode(500,e.toString());
+//				
+//			}
+//			return body;
+//		}
+//
+//
+//}

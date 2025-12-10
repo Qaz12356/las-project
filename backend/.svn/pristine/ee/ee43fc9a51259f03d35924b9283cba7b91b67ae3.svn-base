@@ -1,0 +1,42 @@
+package com.cjxy.las.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+
+import com.cjxy.las.bean.User;
+import com.cjxy.las.service.UserService;
+import jakarta.servlet.http.HttpSession;
+
+@Controller
+public class PersonalController {
+
+    @Autowired
+    private UserService userService;
+
+    @GetMapping("/personal")
+    public String personalInfo(Model model, HttpSession session) {
+        // 从 session 中获取当前登录用户的 ID
+        Integer userId = (Integer) session.getAttribute("userId");
+        if (userId == null) {
+            return "redirect:/login";  // 如果未登录，重定向到登录页面
+        }
+
+        // 获取用户信息 
+        User user = userService.findById(userId);
+        model.addAttribute("user", user);
+        
+        return "personal";
+    }
+
+    @GetMapping("/editProfile")
+    public String editProfile() {
+        return "editProfile";  // 返回编辑个人信息的页面
+    }
+
+    @GetMapping("/changePassword")
+    public String changePassword() {
+        return "changePassword";  // 返回修改密码的页面
+    }
+} 

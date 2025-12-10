@@ -1,0 +1,103 @@
+package com.cjxy.las.service;
+
+import java.util.List;
+
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.ExampleMatcher.GenericPropertyMatchers;
+import org.springframework.stereotype.Service;
+
+import com.cjxy.las.bean.LostType;
+import com.cjxy.las.dao.LostTypeReop;
+
+import jakarta.transaction.Transactional;
+import jakarta.annotation.Resource;
+
+@Service
+@Transactional
+public class LostTypeService {
+
+	@Resource
+	private LostTypeReop lostTypeReop;
+	
+	
+	
+	public List<LostType> queryLostType(String lostTypeName) {
+
+		Sort sort = Sort.by(Sort.Direction.DESC, "lostTypeName");
+		// 匹配器
+		ExampleMatcher matcher = ExampleMatcher.matchingAll().withIgnoreNullValues()
+				.withMatcher("lostTypeName", GenericPropertyMatchers.contains()).withIgnorePaths("lostTypeId");
+		LostType lostType = new LostType();
+		lostType.setLostTypeName(lostTypeName);
+		Example<LostType> ex = Example.of(lostType, matcher);
+		List<LostType> ls = lostTypeReop.findAll(ex,sort);
+		return ls;
+	}
+
+	public List<LostType> queryAllLostType() {
+		return lostTypeReop.findAll();
+	}
+
+//	/**
+//	 * 查询
+//	 * @param lostTypeName
+//	 * @return
+//	 */
+//	public List<LostType> queryLostType(String lostTypeName) {
+//
+//		Sort sort = Sort.by(Sort.Direction.DESC, "lostTypeName");
+//		// 匹配器
+//		ExampleMatcher matcher = ExampleMatcher.matchingAll().withIgnoreNullValues()
+//				.withMatcher("lostTypeName", GenericPropertyMatchers.contains()).withIgnorePaths("lostTypeId");
+//		LostType lostType = new LostType();
+//		lostType.setLostTypeName(lostTypeName);
+//		Example<LostType> ex = Example.of(lostType, matcher);
+//		List<LostType> ls = lostTypeReop.findAll(ex,sort);
+//		return ls;
+//	}
+
+	/**
+	 * 增加部门
+	 * 
+	 * @param lostType
+	 * @return
+	 */
+	public String addLostType(LostType lostType) {
+		List<LostType> ls = lostTypeReop.findByLostTypeName(lostType.getLostTypeName());
+		if (null != ls && ls.size() > 0) {
+			return lostType.getLostTypeName() + "已经存在";
+		} else {
+			lostTypeReop.save(lostType);
+			return "success";
+		}
+
+	}
+	
+	
+	public void delLostType(Integer lostTypeId) {
+		lostTypeReop.deleteById(lostTypeId);
+	}
+	
+	
+	public String updLostType(LostType lostType) {
+		List<LostType> ls = lostTypeReop.findByLostTypeName(lostType.getLostTypeName());
+		if (null != ls && ls.size() > 0) {
+			LostType dt=ls.get(0);
+			if(dt.getLostTypeId()==lostType.getLostTypeId()) {//同一条记录
+				lostTypeReop.save(lostType);
+				return "success";
+			}else {
+				return lostType.getLostTypeName() + "已经存在";
+			}
+			
+		} else {
+			lostTypeReop.save(lostType);
+			return "success";
+		}
+
+	}
+	
+	
+}
